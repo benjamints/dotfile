@@ -1,0 +1,13 @@
+configuration {
+  font: "mono 10";
+  location: 0;
+  padding: 18;
+  width: 60;
+  sidebar-mode: true;
+}
+listview {
+  lines: 12;
+  columns: 2;
+}
+
+/* @theme "gruvbox-dark-hard" */

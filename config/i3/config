@@ -1,0 +1,164 @@
+# set modifier
+set $super Mod4
+set $alt Mod1
+
+# set font
+font pango: Iosevka Term Medium 10
+
+# ---- Windows rule ----
+
+# alias for workspace name
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+
+for_window [class="^.*"] border pixel 3
+smart_borders on
+
+gaps inner 8
+gaps outer 0
+
+# ---- Application ----
+exec --no-startup-id ~/scripts/ChangeWallpaper 
+exec --no-startup-id ibus-daemon -drxR
+exec --no-startup-id qbittorrent &
+exec --no-startup-id flameshot &
+exec --no-startup-id picom --experimental-backends &
+exec --no-startup-id nm-applet &
+exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
+
+# Caplock to Control 
+exec --no-startup-id setxkbmap -option ctrl:nocaps
+
+# ---- App Keybinds ----
+
+# start a terminal
+bindsym $super+Return exec alacritty
+
+# start dmenu (a program launcher)
+bindsym $super+Shift+d exec i3-dmenu-desktop --dmenu="dmenu -i -fn 'Noto Sans:size=8'"
+bindsym $super+d exec rofi -show drun 
+
+# common apps keybinds
+bindsym Print exec flameshot gui
+
+# ---- System key ----
+
+# Lock and Suspend
+bindsym $super+b exec --no-startup-id betterlockscreen --lock dim --display; exec --no-startup-id sleep 1 && systemctl suspend
+# Shutdown
+bindsym $super+Shift+b exec shutdown -h now
+
+# Change volume
+bindsym XF86AudioRaiseVolume exec amixer set Master 1%+
+bindsym XF86AudioLowerVolume exec amixer set Master 1%-
+bindsym XF86AudioMute exec amixer set Master toggle
+
+# Change back light
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10
+
+# ---- Moving and .... ----
+
+# Use Mouse+$super to drag floating windows to their wanted position
+floating_modifier $super
+
+# kill focused window
+bindsym $super+c kill
+bindsym $alt+F4 kill
+
+# change focus
+bindsym $super+Left focus left
+bindsym $super+Down focus down
+bindsym $super+Up focus up
+bindsym $super+Right focus right
+
+bindsym $super+h focus left
+bindsym $super+j focus down
+bindsym $super+k focus up
+bindsym $super+l focus right
+
+# move focused window
+bindsym $super+Shift+Left move left
+bindsym $super+Shift+Down move down
+bindsym $super+Shift+Up move up
+bindsym $super+Shift+Right move right
+
+bindsym $super+Shift+h move left
+bindsym $super+Shift+j move down
+bindsym $super+Shift+k move up
+bindsym $super+Shift+l move right
+
+# split in horizontal orientation
+bindsym $super+n split h
+
+# split in vertical orientation
+bindsym $super+m split v
+
+# enter fullscreen mode for the focused container
+bindsym $super+f fullscreen toggle
+
+# change container layout split
+bindsym $super+s layout toggle split
+
+# toggle tiling / floating
+bindsym $super+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $super+Shift+space focus mode_toggle
+
+# switch to workspace
+bindsym $super+Control+l workspace next
+bindsym $super+Control+h workspace prev
+bindsym $super+1 workspace $ws1
+bindsym $super+2 workspace $ws2
+bindsym $super+3 workspace $ws3
+bindsym $super+4 workspace $ws4
+bindsym $super+5 workspace $ws5
+bindsym $super+6 workspace $ws6
+
+# move focused container to workspace
+bindsym $super+Shift+1 move container to workspace $ws1
+bindsym $super+Shift+2 move container to workspace $ws2
+bindsym $super+Shift+3 move container to workspace $ws3
+bindsym $super+Shift+4 move container to workspace $ws4
+bindsym $super+Shift+5 move container to workspace $ws5
+bindsym $super+Shift+6 move container to workspace $ws6
+
+#
+# ---- i3 restart and exit ----
+#
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $super+Shift+r restart
+
+# exit i3
+bindsym $super+Shift+q exec "i3-nagbar -t warning -m 'Really, exit?' -b 'Yes' 'i3-msg exit'"
+
+# panel 
+bar {
+	position bottom
+	colors 
+	{
+        	background #2f343f
+        	statusline #2f343f
+	        separator #4b5262
+
+       		# colour of border, background, and text
+        	focused_workspace       #2f343f #bf616a #d8dee8
+	        active_workspace        #2f343f #2f343f #d8dee8
+        	inactive_workspace      #2f343f #2f343f #d8dee8
+	        urgent_workspace        #2f343f #ebcb8b #2f343f
+    	}
+    	status_command i3status
+}
+
+# colour of border, background, text, indicator, and child_border
+client.focused              #bf616a #2f343f #d8dee8 #bf616a #d8dee8
+client.focused_inactive     #2f343f #2f343f #d8dee8 #2f343f #2f343f
+client.unfocused            #2f343f #2f343f #d8dee8 #2f343f #2f343f
+client.urgent               #2f343f #2f343f #d8dee8 #2f343f #2f343f
+client.placeholder          #2f343f #2f343f #d8dee8 #2f343f #2f343f
+client.background           #2f343f
