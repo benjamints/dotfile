@@ -1,0 +1,12 @@
+- visual studio
+- powershell
+- sourcetree
+- authy
+- kmp64
+- postman
+- iosevka
+- 1password
+- wireguard
+- qbittorrent
+- rider
+- navicat premium
