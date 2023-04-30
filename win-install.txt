@@ -1,4 +1,5 @@
-- visual studio
+- visual studio / vscode
+- discord
 - powershell
 - sourcetree
 - authy
